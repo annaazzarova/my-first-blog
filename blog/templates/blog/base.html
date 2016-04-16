@@ -11,6 +11,7 @@
         <div class="page-header">
             {% if user.is_authenticated %}
                 <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+                <a href="/dbupdate" class="top-menu"><span class="button submit-row">Обновить</span></a>
             {% endif %}
             <h1><a href="/">Django Girls Blog</a></h1>
         </div>
