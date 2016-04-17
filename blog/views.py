@@ -6,7 +6,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from .forms import PostForm
 import feedparser, time, datetime
-import requests
 
 
 def db_update(request):
@@ -31,7 +30,6 @@ def db_update(request):
             if not post_exist:
                 n += 1
                 post.save()
-    print(requests.get('http://tnt-dance.ru/load/rss/').text)
     return render(request, 'blog/db_upload.html', {'n': n})
 
 
