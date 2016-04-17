@@ -9,7 +9,7 @@
         {% endif %}
         <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         <h1>{{ post.title }}</h1>
-        <p>{{ post.text|linebreaks }}</p>
-        <p class="glyphicon-comment"><a href="{{ post.url }}">Ссылка на источник</a></p>
+        <p>{{ post.text|safe }}</p>
+        <a href="{{ post.url }}">Ссылка на источник</a>
     </div>
 {% endblock %}
