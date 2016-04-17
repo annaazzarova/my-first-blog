@@ -1,11 +1,11 @@
-import urllib
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from .forms import PostForm
-import feedparser, time, datetime
+from django.core import serializers
+import feedparser, time
 
 
 def db_update(request):
@@ -36,7 +36,6 @@ def db_update(request):
 def post_list(request):
     posts_list = Post.objects.order_by('-created_date')
     paginator = Paginator(posts_list, 20)  # Show 25 contacts per page
-
     page = request.GET.get('page')
     try:
         posts = paginator.page(page)
@@ -82,3 +81,9 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+
+
+def json(request):
+    data = serializers.serialize("json", Post.objects.all())
+    return HttpResponse(data, content_type="application/json")
+
